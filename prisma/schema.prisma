@@ -9,9 +9,31 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-
 model users {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id       Int        @id @default(autoincrement())
+  name String 
+  email String
+  test_results test_results[]
+}
+
+model test_results {
+  id            Int                @id @default(autoincrement())
+  user_id        Int
+  user          users               @relation(fields: [user_id], references: [id])
+  test_code String
+  result_details test_result_details[]
+}
+
+model test_result_details {
+  id          Int          @id @default(autoincrement())
+  result_id    Int
+  question_id  Int
+  result      test_results    @relation(fields: [result_id], references: [id])
+  question    question_banks  @relation(fields: [question_id], references: [id])
+}
+
+model question_banks {
+  id      Int    @id @default(autoincrement())
+  question String
+  result_details test_result_details[]
 }
