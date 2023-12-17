@@ -32,6 +32,18 @@
 $ npm install
 ```
 
+## Init prisma
+
+```bash
+$ npx prisma init
+```
+
+## Generate prisma
+
+```bash
+$ npx prisma generate
+```
+
 ## Running the app
 
 ```bash
